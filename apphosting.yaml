@@ -1,0 +1,8 @@
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+
+env:
+  -   variable: GEMINI_API_KEY
+      secret: projects/180163364121/secrets/GEMINI_API_KEY/versions/2
+
