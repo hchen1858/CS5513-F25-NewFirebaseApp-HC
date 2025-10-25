@@ -12,8 +12,8 @@ Transform the "Friendly Eats" restaurant review application into a mythical crea
 - Replace `restaurantNames` with mythical creature names (Dragon, Unicorn, Phoenix, Griffin, Basilisk, Kraken, Cerberus, Pegasus, etc.)
 - Replace `restaurantCities` with zoo habitat names (Enchanted Forest, Dragon's Lair, Mystic Pool, Crystal Caverns, Sky Sanctuary, etc.)
 - Split `restaurantCategories` into two arrays:
-    - `creatureTypes`: Flying, Aquatic, Terrestrial, Magical, Fire-breathing, Ice-dwelling, etc.
-    - `mythologyOrigins`: Greek, Norse, Egyptian, Chinese, Celtic, Japanese, Hindu, Persian, etc.
+        - `creatureTypes`: Flying, Aquatic, Terrestrial, Magical, Fire-breathing, Ice-dwelling, etc.
+        - `mythologyOrigins`: Greek, Norse, Egyptian, Chinese, Celtic, Japanese, Hindu, Persian, etc.
 - Update `restaurantReviews` to creature-appropriate reviews (behavior observations, appearance, interactions, etc.)
 
 ### 2. Firestore Functions (`src/lib/firebase/firestore.js`)
@@ -21,61 +21,61 @@ Transform the "Friendly Eats" restaurant review application into a mythical crea
 - Rename all `restaurant` references to `creature` (functions, variables, collection names)
 - Update `applyQueryFilters` to handle both `creatureType` and `mythologyOrigin` filters
 - Rename functions:
-    - `getRestaurants` → `getCreatures`
-    - `getRestaurantById` → `getCreatureById`
-    - `addReviewToRestaurant` → `addReviewToCreature`
-    - `addFakeRestaurantsAndReviews` → `addFakeCreaturesAndReviews`
+        - `getRestaurants` → `getCreatures`
+        - `getRestaurantById` → `getCreatureById`
+        - `addReviewToRestaurant` → `addReviewToCreature`
+        - `addFakeRestaurantsAndReviews` → `addFakeCreaturesAndReviews`
 - Update Firestore collection paths from `restaurants` to `creatures`
 
 ### 3. Component Renaming and Updates
 
 - **RestaurantListings.jsx** → **CreatureListings.jsx**
-    - Update all props, state, and function names
-    - Change filter structure to include `creatureType` and `mythologyOrigin`
+        - Update all props, state, and function names
+        - Change filter structure to include `creatureType` and `mythologyOrigin`
 
 - **Restaurant.jsx** → **Creature.jsx**
-    - Update image handling function names
-    - Change terminology in comments and variable names
+        - Update image handling function names
+        - Change terminology in comments and variable names
 
 - **RestaurantDetails.jsx** → **CreatureDetails.jsx**
-    - Update display text and metadata structure
-    - Change "category | city" to "creatureType | mythologyOrigin | habitat"
+        - Update display text and metadata structure
+        - Change "category | city" to "creatureType | mythologyOrigin | habitat"
 
 - **Filters.jsx**
-    - Update summary text from "Restaurants" to "Creatures"
-    - Split category filter into two separate filters:
-        - `creatureType` filter with creature types
-        - `mythologyOrigin` filter with mythology origins
-    - Replace `city` filter with `habitat` filter
-    - Keep `price` filter but update label to "Rarity" (still using $ symbols)
+        - Update summary text from "Restaurants" to "Creatures"
+        - Split category filter into two separate filters:
+                - `creatureType` filter with creature types
+                - `mythologyOrigin` filter with mythology origins
+        - Replace `city` filter with `habitat` filter
+        - Keep `price` filter but update label to "Rarity" (still using $ symbols)
 
 ### 4. Main Pages
 
 - **src/app/page.js**
-    - Update function calls to use creature-related functions
-    - Update variable names
+        - Update function calls to use creature-related functions
+        - Update variable names
 
 - **src/app/restaurant/[id]/page.jsx** → **src/app/creature/[id]/page.jsx**
-    - Move the entire folder structure
-    - Update all imports and function calls
+        - Move the entire folder structure
+        - Update all imports and function calls
 
 ### 5. Supporting Files
 
 - **src/lib/fakeRestaurants.js** → **src/lib/fakeCreatures.js**
-    - Update data generation logic
-    - Add support for both creatureType and mythologyOrigin
+        - Update data generation logic
+        - Add support for both creatureType and mythologyOrigin
 
 - **src/components/Reviews/ReviewSummary.jsx**
-    - Update prompt to Gemini to reflect creature reviews
-    - Change "restaurant reviews" to "creature visitor reviews"
+        - Update prompt to Gemini to reflect creature reviews
+        - Change "restaurant reviews" to "creature visitor reviews"
 
 - **src/app/layout.js**
-    - Update metadata title to "Mythical Menagerie" or similar
-    - Update description to reference zoo/creatures
+        - Update metadata title to "Mythical Menagerie" or similar
+        - Update description to reference zoo/creatures
 
 - **src/components/Header.jsx**
-    - Update logo text and alt text
-    - Change "Add sample restaurants" to "Add sample creatures"
+        - Update logo text and alt text
+        - Change "Add sample restaurants" to "Add sample creatures"
 
 ### 6. Database Schema Changes
 
