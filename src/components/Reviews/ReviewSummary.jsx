@@ -13,14 +13,23 @@ export async function GeminiSummary({ creatureId }) {
   );
 
   const reviewSeparator = "@";
+
   const prompt = `
-    Based on the following zoo visitor reviews, 
-    where each review is separated by a '${reviewSeparator}' character, 
-    create a one-sentence summary of what people think of the exhibit. 
+  Based on the following visitor reviews for a mythical creature exhibit at a zoo, 
+  where each review is separated by a '${reviewSeparator}' character, 
+  create a one-sentence summary focusing on the creature's behavior, appearance, 
+  habitat quality, and overall visitor experience. 
 
-    Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
-    `;
-
+  Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
+`;
+  
+if (!reviews || reviews.length === 0) {
+  return (
+    <div className="creature__review_summary">
+      <p>No reviews available for this creature yet.</p>
+    </div>
+  );
+}
 
   try {
     if (!process.env.GEMINI_API_KEY) {
@@ -36,7 +45,16 @@ export async function GeminiSummary({ creatureId }) {
       plugins: [googleAI()],
       model: gemini20Flash, // set default model
     });
-    const { text } = await ai.generate(prompt);
+    const { response } = await ai.generate(prompt);
+    const text = response?.text;
+
+if (!text || text.trim() === '') {
+  return (
+    <div className="creature__review_summary">
+      <p>Unable to generate summary at this time. Empty response from AI</p>
+    </div>
+  );
+}
 
     return (
       <div className="creature__review_summary">
