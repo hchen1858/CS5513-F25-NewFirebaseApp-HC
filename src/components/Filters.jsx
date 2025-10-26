@@ -78,7 +78,7 @@ export default function Filters({ filters, setFilters }) {
             value={filters.creatureType}
             onChange={(event) => handleSelectionChange(event, "creatureType")}
             name="creatureType"
-            icon="/food.svg"
+            icon="/Mythical_menagerie_logo_transparent.png"
           />
 
           <FilterSelect
@@ -109,7 +109,7 @@ export default function Filters({ filters, setFilters }) {
             value={filters.mythologyOrigin}
             onChange={(event) => handleSelectionChange(event, "mythologyOrigin")}
             name="mythologyOrigin"
-            icon="/location.svg"
+            icon="/Dark_rarity_diamond.png"
           />
 
           <FilterSelect
@@ -152,12 +152,12 @@ export default function Filters({ filters, setFilters }) {
           />
 
           <FilterSelect
-            label="Rarity"
-            options={["", "$", "$$", "$$$", "$$$$"]}
+            label="Rarity"          
+            options={["", "♦", "♦♦", "♦♦♦", "♦♦♦♦"]}
             value={filters.rarity}
             onChange={(event) => handleSelectionChange(event, "rarity")}
             name="rarity"
-            icon="/Rarity_transparent.png"
+            icon="/Dark_rarity_diamond.png"
           />
 
           <FilterSelect

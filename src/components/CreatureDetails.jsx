@@ -55,7 +55,7 @@ const CreatureDetails = ({
           <p>
             {creature.creatureType} | {creature.mythologyOrigin} | {creature.habitat}
           </p>
-          <p>{"$".repeat(creature.rarity)}</p>
+          <p>{"◆".repeat(creature.rarity)}</p>  // Diamonds          
           {children}
         </div>
       </div>
