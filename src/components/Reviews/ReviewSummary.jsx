@@ -21,6 +21,8 @@ export async function GeminiSummary({ creatureId }) {
     Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
   `;
 
+  console.log("prompt: ", prompt);
+
   try {
     if (!process.env.GEMINI_API_KEY) {
       // Make sure GEMINI_API_KEY environment variable is set:
