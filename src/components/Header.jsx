@@ -6,7 +6,7 @@ import {
   signOut,
   onIdTokenChanged,
 } from "@/src/lib/firebase/auth.js";
-import { addFakeRestaurantsAndReviews } from "@/src/lib/firebase/firestore.js";
+import { addFakeCreaturesAndReviews } from "@/src/lib/firebase/firestore.js";
 import { setCookie, deleteCookie } from "cookies-next";
 
 
@@ -45,8 +45,8 @@ export default function Header({ initialUser }) {
   return (
     <header>
       <Link href="/" className="logo">
-        <img src="/friendly-eats.svg" alt="FriendlyEats" />
-        Friendly Eats
+        <img src="/friendly-eats.svg" alt="Mythical Menagerie" />
+        Mythical Menagerie
       </Link>
       {user ? (
         <>
@@ -66,8 +66,8 @@ export default function Header({ initialUser }) {
                 <li>{user.displayName}</li>
 
                 <li>
-                  <a href="#" onClick={addFakeRestaurantsAndReviews}>
-                    Add sample restaurants
+                  <a href="#" onClick={addFakeCreaturesAndReviews}>
+                    Add sample creatures
                   </a>
                 </li>
 

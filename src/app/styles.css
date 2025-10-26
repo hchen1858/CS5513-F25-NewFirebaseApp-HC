@@ -198,7 +198,7 @@ header {
   min-height: 100vh;
 }
 
-.main__restaurant {
+.main__creature {
   background-color: rgb(229 234 240);
   min-height: 90vh;
 }
@@ -213,7 +213,7 @@ article {
   width: 75%;
 }
 
-.restaurants {
+.creatures {
   display: grid;
   margin-top: 20px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -257,7 +257,7 @@ a {
   text-decoration: none;
 }
 
-.restaurant__meta {
+.creature__meta {
   display: flex;
   font-weight: 500;
   justify-content: space-between;
@@ -265,11 +265,11 @@ a {
   margin-bottom: 10px;
 }
 
-.restaurant__details {
+.creature__details {
   padding: 20px;
 }
 
-.restaurant__rating {
+.creature__rating {
   padding: 5px 0;
   display: flex;
   align-items: center;
@@ -289,7 +289,7 @@ a {
   }
 }
 
-.restaurant__review_summary {
+.creature__review_summary {
   max-width: "50vw";
   height: "75px";
   padding-top: "10px";
@@ -468,7 +468,7 @@ a {
     gold var(--percent),
     rgba(0, 0, 0, 0.2) var(--percent)
   );
-  -webkit-background-clip: text;
+  /*-webkit-background-clip: text;*/
   -webkit-text-fill-color: transparent;
 }
 

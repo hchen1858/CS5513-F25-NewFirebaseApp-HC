@@ -1,19 +1,19 @@
-// This component shows restaurant metadata, and offers some actions to the user like uploading a new restaurant image, and adding a review.
+// This component shows creature metadata, and offers some actions to the user like uploading a new creature image, and adding a review.
 
 import React from "react";
 import renderStars from "@/src/components/Stars.jsx";
 
-const RestaurantDetails = ({
-  restaurant,
+const CreatureDetails = ({
+  creature,
   userId,
-  handleRestaurantImage,
+  handleCreatureImage,
   setIsOpen,
   isOpen,
   children,
 }) => {
   return (
     <section className="img__section">
-      <img src={restaurant.photo} alt={restaurant.name} />
+      <img src={creature.photo} alt={creature.name} />
 
       <div className="actions">
         {userId && (
@@ -27,7 +27,7 @@ const RestaurantDetails = ({
           />
         )}
         <label
-          onChange={(event) => handleRestaurantImage(event.target)}
+          onChange={(event) => handleCreatureImage(event.target)}
           htmlFor="upload-image"
           className="add"
         >
@@ -44,18 +44,18 @@ const RestaurantDetails = ({
 
       <div className="details__container">
         <div className="details">
-          <h2>{restaurant.name}</h2>
+          <h2>{creature.name}</h2>
 
-          <div className="restaurant__rating">
-            <ul>{renderStars(restaurant.avgRating)}</ul>
+          <div className="creature__rating">
+            <ul>{renderStars(creature.avgRating)}</ul>
 
-            <span>({restaurant.numRatings})</span>
+            <span>({creature.numRatings})</span>
           </div>
 
           <p>
-            {restaurant.category} | {restaurant.city}
+            {creature.creatureType} | {creature.mythologyOrigin} | {creature.habitat}
           </p>
-          <p>{"$".repeat(restaurant.price)}</p>
+          <p>{"$".repeat(creature.rarity)}</p>
           {children}
         </div>
       </div>
@@ -63,4 +63,4 @@ const RestaurantDetails = ({
   );
 };
 
-export default RestaurantDetails;
+export default CreatureDetails;

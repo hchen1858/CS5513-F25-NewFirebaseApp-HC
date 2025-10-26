@@ -1,4 +1,4 @@
-// The filters shown on the restaurant listings page
+// The filters shown on the creature listings page
 
 import Tag from "@/src/components/Tag.jsx";
 
@@ -38,7 +38,7 @@ export default function Filters({ filters, setFilters }) {
         <summary>
           <img src="/filter.svg" alt="filter" />
           <div>
-            <p>Restaurants</p>
+            <p>Creatures</p>
             <p>Sorted by {filters.sort || "Rating"}</p>
           </div>
         </summary>
@@ -51,57 +51,112 @@ export default function Filters({ filters, setFilters }) {
           }}
         >
           <FilterSelect
-            label="Category"
+            label="Creature Type"
             options={[
               "",
-              "Italian",
-              "Chinese",
-              "Japanese",
-              "Mexican",
-              "Indian",
-              "Mediterranean",
-              "Caribbean",
-              "Cajun",
-              "German",
-              "Russian",
-              "Cuban",
-              "Organic",
-              "Tapas",
+              "Flying",
+              "Aquatic",
+              "Terrestrial",
+              "Magical",
+              "Fire-breathing",
+              "Ice-dwelling",
+              "Electric",
+              "Shadow",
+              "Light",
+              "Elemental",
+              "Mystical",
+              "Guardian",
+              "Spirit",
+              "Beast",
+              "Serpent",
+              "Winged",
+              "Underwater",
+              "Mountain",
+              "Forest",
+              "Desert",
             ]}
-            value={filters.category}
-            onChange={(event) => handleSelectionChange(event, "category")}
-            name="category"
+            value={filters.creatureType}
+            onChange={(event) => handleSelectionChange(event, "creatureType")}
+            name="creatureType"
             icon="/food.svg"
           />
 
           <FilterSelect
-            label="City"
+            label="Mythology Origin"
             options={[
               "",
-              "New York",
-              "Los Angeles",
-              "London",
-              "Paris",
-              "Tokyo",
-              "Mumbai",
-              "Dubai",
-              "Amsterdam",
-              "Seoul",
-              "Singapore",
-              "Istanbul",
+              "Greek",
+              "Norse",
+              "Egyptian",
+              "Chinese",
+              "Celtic",
+              "Japanese",
+              "Hindu",
+              "Persian",
+              "Roman",
+              "Aztec",
+              "Mayan",
+              "Incan",
+              "African",
+              "Native American",
+              "Slavic",
+              "Germanic",
+              "Arabian",
+              "Mesoamerican",
+              "Polynesian",
+              "Australian Aboriginal",
             ]}
-            value={filters.city}
-            onChange={(event) => handleSelectionChange(event, "city")}
-            name="city"
+            value={filters.mythologyOrigin}
+            onChange={(event) => handleSelectionChange(event, "mythologyOrigin")}
+            name="mythologyOrigin"
             icon="/location.svg"
           />
 
           <FilterSelect
-            label="Price"
+            label="Habitat"
+            options={[
+              "",
+              "Enchanted Forest",
+              "Dragon's Lair",
+              "Mystic Pool",
+              "Crystal Caverns",
+              "Sky Sanctuary",
+              "Fire Mountain",
+              "Ice Palace",
+              "Thunder Peak",
+              "Shadow Valley",
+              "Golden Meadow",
+              "Silver Lake",
+              "Emerald Grove",
+              "Ruby Desert",
+              "Sapphire Ocean",
+              "Diamond Caves",
+              "Pearl Garden",
+              "Coral Reef",
+              "Amber Fields",
+              "Jade Mountains",
+              "Onyx Depths",
+              "Topaz Plains",
+              "Garnet Hills",
+              "Opal Meadows",
+              "Turquoise Bay",
+              "Lapis Falls",
+              "Quartz Valley",
+              "Agate Springs",
+              "Moonstone Glade",
+            ]}
+            value={filters.habitat}
+            onChange={(event) => handleSelectionChange(event, "habitat")}
+            name="habitat"
+            icon="/location.svg"
+          />
+
+          <FilterSelect
+            label="Rarity"
             options={["", "$", "$$", "$$$", "$$$$"]}
-            value={filters.price}
-            onChange={(event) => handleSelectionChange(event, "price")}
-            name="price"
+            value={filters.rarity}
+            onChange={(event) => handleSelectionChange(event, "rarity")}
+            name="rarity"
             icon="/price.svg"
           />
 
@@ -121,9 +176,10 @@ export default function Filters({ filters, setFilters }) {
                 type="reset"
                 onClick={() => {
                   setFilters({
-                    city: "",
-                    category: "",
-                    price: "",
+                    habitat: "",
+                    creatureType: "",
+                    mythologyOrigin: "",
+                    rarity: "",
                     sort: "",
                   });
                 }}

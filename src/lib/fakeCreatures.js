@@ -7,28 +7,28 @@ import { randomData } from "@/src/lib/randomData.js";
 
 import { Timestamp } from "firebase/firestore";
 
-export async function generateFakeRestaurantsAndReviews() {
-  const restaurantsToAdd = 5;
+export async function generateFakeCreaturesAndReviews() {
+  const creaturesToAdd = 5;
   const data = [];
 
-  for (let i = 0; i < restaurantsToAdd; i++) {
-    const restaurantTimestamp = Timestamp.fromDate(getRandomDateBefore());
+  for (let i = 0; i < creaturesToAdd; i++) {
+    const creatureTimestamp = Timestamp.fromDate(getRandomDateBefore());
 
     const ratingsData = [];
 
-    // Generate a random number of ratings/reviews for this restaurant
+    // Generate a random number of ratings/reviews for this creature
     for (let j = 0; j < randomNumberBetween(0, 5); j++) {
       const ratingTimestamp = Timestamp.fromDate(
-        getRandomDateAfter(restaurantTimestamp.toDate())
+        getRandomDateAfter(creatureTimestamp.toDate())
       );
 
       const ratingData = {
         rating:
-          randomData.restaurantReviews[
-            randomNumberBetween(0, randomData.restaurantReviews.length - 1)
+          randomData.creatureReviews[
+            randomNumberBetween(0, randomData.creatureReviews.length - 1)
           ].rating,
-        text: randomData.restaurantReviews[
-          randomNumberBetween(0, randomData.restaurantReviews.length - 1)
+        text: randomData.creatureReviews[
+          randomNumberBetween(0, randomData.creatureReviews.length - 1)
         ].text,
         userId: `User #${randomNumberBetween()}`,
         timestamp: ratingTimestamp,
@@ -44,33 +44,37 @@ export async function generateFakeRestaurantsAndReviews() {
         ) / ratingsData.length
       : 0;
 
-    const restaurantData = {
-      category:
-        randomData.restaurantCategories[
-          randomNumberBetween(0, randomData.restaurantCategories.length - 1)
+    const creatureData = {
+      creatureType:
+        randomData.creatureTypes[
+          randomNumberBetween(0, randomData.creatureTypes.length - 1)
         ],
-      name: randomData.restaurantNames[
-        randomNumberBetween(0, randomData.restaurantNames.length - 1)
+      mythologyOrigin:
+        randomData.mythologyOrigins[
+          randomNumberBetween(0, randomData.mythologyOrigins.length - 1)
+        ],
+      name: randomData.creatureNames[
+        randomNumberBetween(0, randomData.creatureNames.length - 1)
       ],
       avgRating,
-      city: randomData.restaurantCities[
-        randomNumberBetween(0, randomData.restaurantCities.length - 1)
+      habitat: randomData.creatureHabitats[
+        randomNumberBetween(0, randomData.creatureHabitats.length - 1)
       ],
       numRatings: ratingsData.length,
       sumRating: ratingsData.reduce(
         (accumulator, currentValue) => accumulator + currentValue.rating,
         0
       ),
-      price: randomNumberBetween(1, 4),
+      rarity: randomNumberBetween(1, 4),
       photo: `https://storage.googleapis.com/firestorequickstarts.appspot.com/food_${randomNumberBetween(
         1,
         22
       )}.png`,
-      timestamp: restaurantTimestamp,
+      timestamp: creatureTimestamp,
     };
 
     data.push({
-      restaurantData,
+      creatureData,
       ratingsData,
     });
   }

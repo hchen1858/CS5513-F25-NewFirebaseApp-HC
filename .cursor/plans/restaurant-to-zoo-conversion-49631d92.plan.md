@@ -1,123 +1,37 @@
-<!-- 49631d92-a2e5-4873-b2be-8c83c3ff2055 f31a6a62-9133-474d-a905-27b6a9d8d148 -->
-# Convert Restaurant Site to Mythical Creatures Zoo
+<!-- 49631d92-a2e5-4873-b2be-8c83c3ff2055 d7c725ef-ab3c-4585-9c2e-ed2c78a7e82c -->
+# Update CSS for Mythical Menagerie
 
 ## Overview
 
-Transform the "Friendly Eats" restaurant review application into a mythical creatures zoo visitor review site called "Mythical Menagerie" (or similar). This involves renaming all restaurant-related terminology, updating data structures, modifying filters, and refreshing the UI theme.
+Update the `src/app/styles.css` file to replace all restaurant-related CSS class names with creature-themed equivalents to match the component changes already made.
 
-## Key Changes
+## CSS Class Name Changes Required
 
-### 1. Data Model Updates (`src/lib/randomData.js`)
+### Main Layout Classes
 
-- Replace `restaurantNames` with mythical creature names (Dragon, Unicorn, Phoenix, Griffin, Basilisk, Kraken, Cerberus, Pegasus, etc.)
-- Replace `restaurantCities` with zoo habitat names (Enchanted Forest, Dragon's Lair, Mystic Pool, Crystal Caverns, Sky Sanctuary, etc.)
-- Split `restaurantCategories` into two arrays:
-        - `creatureTypes`: Flying, Aquatic, Terrestrial, Magical, Fire-breathing, Ice-dwelling, etc.
-        - `mythologyOrigins`: Greek, Norse, Egyptian, Chinese, Celtic, Japanese, Hindu, Persian, etc.
-- Update `restaurantReviews` to creature-appropriate reviews (behavior observations, appearance, interactions, etc.)
+- `.main__restaurant` → `.main__creature` (line 201)
 
-### 2. Firestore Functions (`src/lib/firebase/firestore.js`)
+### Grid and List Classes  
 
-- Rename all `restaurant` references to `creature` (functions, variables, collection names)
-- Update `applyQueryFilters` to handle both `creatureType` and `mythologyOrigin` filters
-- Rename functions:
-        - `getRestaurants` → `getCreatures`
-        - `getRestaurantById` → `getCreatureById`
-        - `addReviewToRestaurant` → `addReviewToCreature`
-        - `addFakeRestaurantsAndReviews` → `addFakeCreaturesAndReviews`
-- Update Firestore collection paths from `restaurants` to `creatures`
+- `.restaurants` → `.creatures` (line 216)
 
-### 3. Component Renaming and Updates
+### Component-Specific Classes
 
-- **RestaurantListings.jsx** → **CreatureListings.jsx**
-        - Update all props, state, and function names
-        - Change filter structure to include `creatureType` and `mythologyOrigin`
+- `.restaurant__meta` → `.creature__meta` (line 260)
+- `.restaurant__details` → `.creature__details` (line 268)
+- `.restaurant__rating` → `.creature__rating` (line 272)
+- `.restaurant__review_summary` → `.creature__review_summary` (line 292)
 
-- **Restaurant.jsx** → **Creature.jsx**
-        - Update image handling function names
-        - Change terminology in comments and variable names
+## Changes Summary
 
-- **RestaurantDetails.jsx** → **CreatureDetails.jsx**
-        - Update display text and metadata structure
-        - Change "category | city" to "creatureType | mythologyOrigin | habitat"
+1. **Line 201**: Update main page class for creature detail pages
+2. **Line 216**: Update grid container class for creature listings
+3. **Line 260**: Update metadata display class
+4. **Line 268**: Update details container class
+5. **Line 272**: Update rating display class
+6. **Line 292**: Update Gemini review summary class
 
-- **Filters.jsx**
-        - Update summary text from "Restaurants" to "Creatures"
-        - Split category filter into two separate filters:
-                - `creatureType` filter with creature types
-                - `mythologyOrigin` filter with mythology origins
-        - Replace `city` filter with `habitat` filter
-        - Keep `price` filter but update label to "Rarity" (still using $ symbols)
-
-### 4. Main Pages
-
-- **src/app/page.js**
-        - Update function calls to use creature-related functions
-        - Update variable names
-
-- **src/app/restaurant/[id]/page.jsx** → **src/app/creature/[id]/page.jsx**
-        - Move the entire folder structure
-        - Update all imports and function calls
-
-### 5. Supporting Files
-
-- **src/lib/fakeRestaurants.js** → **src/lib/fakeCreatures.js**
-        - Update data generation logic
-        - Add support for both creatureType and mythologyOrigin
-
-- **src/components/Reviews/ReviewSummary.jsx**
-        - Update prompt to Gemini to reflect creature reviews
-        - Change "restaurant reviews" to "creature visitor reviews"
-
-- **src/app/layout.js**
-        - Update metadata title to "Mythical Menagerie" or similar
-        - Update description to reference zoo/creatures
-
-- **src/components/Header.jsx**
-        - Update logo text and alt text
-        - Change "Add sample restaurants" to "Add sample creatures"
-
-### 6. Database Schema Changes
-
-The Firestore structure will change from:
-
-```
-restaurants/{restaurantId}
-  - name, category, city, price, photo, avgRating, numRatings
-  - ratings/{ratingId}
-```
-
-To:
-
-```
-creatures/{creatureId}
-  - name, creatureType, mythologyOrigin, habitat, rarity, photo, avgRating, numRatings
-  - ratings/{ratingId}
-```
-
-### 7. Filter System Enhancement
-
-Current: city, category, price, sort
-
-New: habitat, creatureType, mythologyOrigin, rarity, sort
-
-This requires updating URL query parameters and filter state management throughout the application.
-
-## Files to Modify
-
-- `src/lib/randomData.js`
-- `src/lib/fakeRestaurants.js` → `src/lib/fakeCreatures.js`
-- `src/lib/firebase/firestore.js`
-- `src/lib/firebase/storage.js`
-- `src/components/RestaurantListings.jsx` → `src/components/CreatureListings.jsx`
-- `src/components/Restaurant.jsx` → `src/components/Creature.jsx`
-- `src/components/RestaurantDetails.jsx` → `src/components/CreatureDetails.jsx`
-- `src/components/Filters.jsx`
-- `src/components/Header.jsx`
-- `src/components/Reviews/ReviewSummary.jsx`
-- `src/app/page.js`
-- `src/app/restaurant/[id]/` → `src/app/creature/[id]/`
-- `src/app/layout.js`
+All other CSS remains unchanged as it applies to general layout, dialogs, headers, filters, and reviews which are theme-agnostic.
 
 ### To-dos
 

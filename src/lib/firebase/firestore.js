@@ -1,4 +1,4 @@
-import { generateFakeRestaurantsAndReviews } from "@/src/lib/fakeRestaurants.js";
+import { generateFakeCreaturesAndReviews } from "@/src/lib/fakeCreatures.js";
 
 import {
   collection,
@@ -18,13 +18,13 @@ import {
 
 import { db } from "@/src/lib/firebase/clientApp";
 
-export async function updateRestaurantImageReference(
-  restaurantId,
+export async function updateCreatureImageReference(
+  creatureId,
   publicImageUrl
 ) {
-  const restaurantRef = doc(collection(db, "restaurants"), restaurantId);
-  if (restaurantRef) {
-    await updateDoc(restaurantRef, { photo: publicImageUrl });
+  const creatureRef = doc(collection(db, "creatures"), creatureId);
+  if (creatureRef) {
+    await updateDoc(creatureRef, { photo: publicImageUrl });
   }
 }
 
@@ -34,8 +34,8 @@ const updateWithRating = async (
   newRatingDocument,
   review
 ) => {
-  const restaurant = await transaction.get(docRef);
-  const data = restaurant.data();
+  const creature = await transaction.get(docRef);
+  const data = creature.data();
   const newNumRatings = data?.numRatings ? data.numRatings + 1 : 1;
   const newSumRating = (data?.sumRating || 0) + Number(review.rating);
   const newAverage = newSumRating / newNumRatings;
@@ -44,7 +44,7 @@ const updateWithRating = async (
     numRatings: newNumRatings,
     sumRating: newSumRating,
     avgRating: newAverage,
-    //Add new field for userId making review to use as security check
+    //Add new field for userId making review to use as security check per Ethan's security fix
     lastReviewUserId: review.userId,
   });
 
@@ -54,9 +54,9 @@ const updateWithRating = async (
   });
 };
 
-export async function addReviewToRestaurant(db, restaurantId, review) {
-  if (!restaurantId) {
-          throw new Error("No restaurant ID has been provided.");
+export async function addReviewToCreature(db, creatureId, review) {
+  if (!creatureId) {
+          throw new Error("No creature ID has been provided.");
   }
 
   if (!review) {
@@ -64,9 +64,9 @@ export async function addReviewToRestaurant(db, restaurantId, review) {
   }
 
   try {
-          const docRef = doc(collection(db, "restaurants"), restaurantId);
+          const docRef = doc(collection(db, "creatures"), creatureId);
           const newRatingDocument = doc(
-                  collection(db, `restaurants/${restaurantId}/ratings`)
+                  collection(db, `creatures/${creatureId}/ratings`)
           );
 
           // corrected line
@@ -75,7 +75,7 @@ export async function addReviewToRestaurant(db, restaurantId, review) {
           );
   } catch (error) {
           console.error(
-                  "There was an error adding the rating to the restaurant",
+                  "There was an error adding the rating to the creature",
                   error
           );
           throw error;
@@ -83,15 +83,18 @@ export async function addReviewToRestaurant(db, restaurantId, review) {
 }
 
 
-function applyQueryFilters(q, { category, city, price, sort }) {
-  if (category) {
-    q = query(q, where("category", "==", category));
+function applyQueryFilters(q, { creatureType, mythologyOrigin, habitat, rarity, sort }) {
+  if (creatureType) {
+    q = query(q, where("creatureType", "==", creatureType));
   }
-  if (city) {
-    q = query(q, where("city", "==", city));
+  if (mythologyOrigin) {
+    q = query(q, where("mythologyOrigin", "==", mythologyOrigin));
   }
-  if (price) {
-    q = query(q, where("price", "==", price.length));
+  if (habitat) {
+    q = query(q, where("habitat", "==", habitat));
+  }
+  if (rarity) {
+    q = query(q, where("rarity", "==", rarity.length));
   }
   if (sort === "Rating" || !sort) {
     q = query(q, orderBy("avgRating", "desc"));
@@ -101,8 +104,8 @@ function applyQueryFilters(q, { category, city, price, sort }) {
   return q;
 }
 
-export async function getRestaurants(db = db, filters = {}) {
-  let q = query(collection(db, "restaurants"));
+export async function getCreatures(db = db, filters = {}) {
+  let q = query(collection(db, "creatures"));
 
   q = applyQueryFilters(q, filters);
   const results = await getDocs(q);
@@ -116,13 +119,13 @@ export async function getRestaurants(db = db, filters = {}) {
   });
 }
 
-export function getRestaurantsSnapshot(cb, filters = {}) {
+export function getCreaturesSnapshot(cb, filters = {}) {
   if (typeof cb !== "function") {
     console.log("Error: The callback parameter is not a function");
     return;
   }
 
-  let q = query(collection(db, "restaurants"));
+  let q = query(collection(db, "creatures"));
   q = applyQueryFilters(q, filters);
 
   return onSnapshot(q, (querySnapshot) => {
@@ -139,12 +142,12 @@ export function getRestaurantsSnapshot(cb, filters = {}) {
   });
 }
 
-export async function getRestaurantById(db, restaurantId) {
-  if (!restaurantId) {
-    console.log("Error: Invalid ID received: ", restaurantId);
+export async function getCreatureById(db, creatureId) {
+  if (!creatureId) {
+    console.log("Error: Invalid ID received: ", creatureId);
     return;
   }
-  const docRef = doc(db, "restaurants", restaurantId);
+  const docRef = doc(db, "creatures", creatureId);
   const docSnap = await getDoc(docRef);
   return {
     ...docSnap.data(),
@@ -155,9 +158,9 @@ export async function getRestaurantById(db, restaurantId) {
 // this function is complete in the nextjs-end codebase,
 // but is never introduced in the tutorial steps anywhere, 
 // so it remains non-functional at the end of the tutorial
-export function getRestaurantSnapshotById(restaurantId, cb) {
-  if (!restaurantId) {
-    console.log("Error: Invalid ID received: ", restaurantId);
+export function getCreatureSnapshotById(creatureId, cb) {
+  if (!creatureId) {
+    console.log("Error: Invalid ID received: ", creatureId);
     return;
   }
 
@@ -166,7 +169,7 @@ export function getRestaurantSnapshotById(restaurantId, cb) {
     return;
   }
 
-  const docRef = doc(db, "restaurants", restaurantId);
+  const docRef = doc(db, "creatures", creatureId);
   return onSnapshot(docRef, (docSnap) => {
     cb({
       ...docSnap.data(),
@@ -175,22 +178,16 @@ export function getRestaurantSnapshotById(restaurantId, cb) {
   });
 }
 
-/* original function found in nextjs-start 
-export function getRestaurantSnapshotById(restaurantId, cb) {
-  return;
-}
-*/
 
 
-
-export async function getReviewsByRestaurantId(db, restaurantId) {
-  if (!restaurantId) {
-    console.log("Error: Invalid restaurantId received: ", restaurantId);
+export async function getReviewsByCreatureId(db, creatureId) {
+  if (!creatureId) {
+    console.log("Error: Invalid creatureId received: ", creatureId);
     return;
   }
 
   const q = query(
-    collection(db, "restaurants", restaurantId, "ratings"),
+    collection(db, "creatures", creatureId, "ratings"),
     orderBy("timestamp", "desc")
   );
 
@@ -205,14 +202,14 @@ export async function getReviewsByRestaurantId(db, restaurantId) {
   });
 }
 
-export function getReviewsSnapshotByRestaurantId(restaurantId, cb) {
-  if (!restaurantId) {
-    console.log("Error: Invalid restaurantId received: ", restaurantId);
+export function getReviewsSnapshotByCreatureId(creatureId, cb) {
+  if (!creatureId) {
+    console.log("Error: Invalid creatureId received: ", creatureId);
     return;
   }
 
   const q = query(
-    collection(db, "restaurants", restaurantId, "ratings"),
+    collection(db, "creatures", creatureId, "ratings"),
     orderBy("timestamp", "desc")
   );
   return onSnapshot(q, (querySnapshot) => {
@@ -228,18 +225,18 @@ export function getReviewsSnapshotByRestaurantId(restaurantId, cb) {
   });
 }
 
-export async function addFakeRestaurantsAndReviews() {
-  const data = await generateFakeRestaurantsAndReviews();
-  for (const { restaurantData, ratingsData } of data) {
+export async function addFakeCreaturesAndReviews() {
+  const data = await generateFakeCreaturesAndReviews();
+  for (const { creatureData, ratingsData } of data) {
     try {
       const docRef = await addDoc(
-        collection(db, "restaurants"),
-        restaurantData
+        collection(db, "creatures"),
+        creatureData
       );
 
       for (const ratingData of ratingsData) {
         await addDoc(
-          collection(db, "restaurants", docRef.id, "ratings"),
+          collection(db, "creatures", docRef.id, "ratings"),
           ratingData
         );
       }

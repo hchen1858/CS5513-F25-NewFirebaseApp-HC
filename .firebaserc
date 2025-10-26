@@ -1,6 +1,6 @@
 {
   "projects": {
-    "friendlyeats-codelab": "week10transmute",
+    //"friendlyeats-codelab": "week10transmute",
     "tranmutedapp": "new-firebase-tranmutedapp"
   },
   "targets": {},

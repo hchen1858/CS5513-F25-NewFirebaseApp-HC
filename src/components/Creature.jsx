@@ -1,24 +1,24 @@
 "use client";
 
-// This components shows one individual restaurant
-// It receives data from src/app/restaurant/[id]/page.jsx
+// This components shows one individual creature
+// It receives data from src/app/creature/[id]/page.jsx
 
 import { React, useState, useEffect, Suspense } from "react";
 import dynamic from "next/dynamic";
-import { getRestaurantSnapshotById } from "@/src/lib/firebase/firestore.js";
+import { getCreatureSnapshotById } from "@/src/lib/firebase/firestore.js";
 import { useUser } from "@/src/lib/getUser";
-import RestaurantDetails from "@/src/components/RestaurantDetails.jsx";
-import { updateRestaurantImage } from "@/src/lib/firebase/storage.js";
+import CreatureDetails from "@/src/components/CreatureDetails.jsx";
+import { updateCreatureImage } from "@/src/lib/firebase/storage.js";
 
 const ReviewDialog = dynamic(() => import("@/src/components/ReviewDialog.jsx"));
 
-export default function Restaurant({
+export default function Creature({
   id,
-  initialRestaurant,
+  initialCreature,
   initialUserId,
   children,
 }) {
-  const [restaurantDetails, setRestaurantDetails] = useState(initialRestaurant);
+  const [creatureDetails, setCreatureDetails] = useState(initialCreature);
   const [isOpen, setIsOpen] = useState(false);
 
   // The only reason this component needs to know the user ID is to associate a review with the user, and to know whether to show the review dialog
@@ -32,14 +32,14 @@ export default function Restaurant({
     setReview({ ...review, [name]: value });
   };
 
-  async function handleRestaurantImage(target) {
+  async function handleCreatureImage(target) {
     const image = target.files ? target.files[0] : null;
     if (!image) {
       return;
     }
 
-    const imageURL = await updateRestaurantImage(id, image);
-    setRestaurantDetails({ ...restaurantDetails, photo: imageURL });
+    const imageURL = await updateCreatureImage(id, image);
+    setCreatureDetails({ ...creatureDetails, photo: imageURL });
   }
 
   const handleClose = () => {
@@ -48,22 +48,22 @@ export default function Restaurant({
   };
 
   useEffect(() => {
-    return getRestaurantSnapshotById(id, (data) => {
-      setRestaurantDetails(data);
+    return getCreatureSnapshotById(id, (data) => {
+      setCreatureDetails(data);
     });
   }, [id]);
 
   return (
     <>
-      <RestaurantDetails
-        restaurant={restaurantDetails}
+      <CreatureDetails
+        creature={creatureDetails}
         userId={userId}
-        handleRestaurantImage={handleRestaurantImage}
+        handleCreatureImage={handleCreatureImage}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
       >
         {children}
-      </RestaurantDetails>
+      </CreatureDetails>
       {userId && (
         <Suspense fallback={<p>Loading...</p>}>
           <ReviewDialog
