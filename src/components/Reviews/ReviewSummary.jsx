@@ -14,14 +14,13 @@ export async function GeminiSummary({ creatureId }) {
 
   const reviewSeparator = "@";
   const prompt = `
-    Based on the following creature visitor reviews, 
+    Based on the following zoo visitor reviews, 
     where each review is separated by a '${reviewSeparator}' character, 
-    create a one-sentence summary of what people think of the creature exhibit. 
+    create a one-sentence summary of what people think of the exhibit. 
 
     Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
-  `;
+     `;
 
-  console.log("prompt: ", prompt);
 
   try {
     if (!process.env.GEMINI_API_KEY) {
