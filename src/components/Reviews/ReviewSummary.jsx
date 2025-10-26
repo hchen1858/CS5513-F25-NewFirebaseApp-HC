@@ -19,7 +19,7 @@ export async function GeminiSummary({ creatureId }) {
     create a one-sentence summary of what people think of the exhibit. 
 
     Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
-     `;
+    `;
 
 
   try {
