@@ -157,7 +157,7 @@ export default function Filters({ filters, setFilters }) {
             value={filters.rarity}
             onChange={(event) => handleSelectionChange(event, "rarity")}
             name="rarity"
-            icon="/price.svg"
+            icon="/Rarity_transparent.png"
           />
 
           <FilterSelect

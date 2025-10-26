@@ -45,7 +45,7 @@ export default function Header({ initialUser }) {
   return (
     <header>
       <Link href="/" className="logo">
-        <img src="/friendly-eats.svg" alt="Mythical Menagerie" />
+        <img src="/Mythical_menagerie_logo_transparent.png" alt="Mythical Menagerie" />
         Mythical Menagerie
       </Link>
       {user ? (
