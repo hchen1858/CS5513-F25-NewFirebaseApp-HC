@@ -8,10 +8,9 @@
 
 body {
   font-family:
-    "Roboto",
-    ui-sans-serif,
-    system-ui,
-    -apple-system;
+    "Times New Roman",
+    "Times",
+    serif;    
 }
 
 ul {
@@ -202,7 +201,7 @@ header {
 }
 
 .main__creature {
-  background-color: rgb(27, 27, 105);
+  background-color: rgb(180, 180, 187);
   min-height: 90vh;
 }
 
