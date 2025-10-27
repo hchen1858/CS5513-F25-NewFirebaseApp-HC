@@ -109,7 +109,7 @@ export default function Filters({ filters, setFilters }) {
             value={filters.mythologyOrigin}
             onChange={(event) => handleSelectionChange(event, "mythologyOrigin")}
             name="mythologyOrigin"
-            icon="/Dark_rarity_diamond.png"
+            icon="/origin_transparent.png"
           />
 
           <FilterSelect

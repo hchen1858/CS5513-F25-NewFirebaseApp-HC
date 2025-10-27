@@ -97,14 +97,16 @@ footer {
 }
 
 header {
-  background-color: rgb(56 85 116);
+  background-color:firebrick;
+  /*background-color: rgb(56 85 116);*/
   color: white;
   display: flex;
   justify-content: space-between;
   padding: 0.8rem;
   align-items: center;
   & img {
-    height: 2rem;
+    height: 10rem;
+    /*height: 2rem;*/
   }
 
   & ul {
