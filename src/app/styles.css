@@ -197,18 +197,18 @@ header {
 }
 
 .main__home {
-  background-color: rgb(178 193 212);
+  background-color: rgb(1, 6, 37);
   min-height: 100vh;
 }
 
 .main__creature {
-  background-color: rgb(229 234 240);
+  background-color: rgb(17, 17, 74);
   min-height: 90vh;
 }
 
 article {
   margin: 0 auto;
-  background-color: rgb(229 234 240);
+  background-color: rgb(229, 229, 240);
   padding: 20px 40px;
 }
 
