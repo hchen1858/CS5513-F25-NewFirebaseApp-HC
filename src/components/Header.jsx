@@ -46,7 +46,7 @@ export default function Header({ initialUser }) {
     <header>
       <Link href="/" className="logo">
         <img src="/Mythical_menagerie_logo_transparent.png" alt="Mythical Menagerie" />
-        Mythical Menagerie
+        Mythos Menagerie
       </Link>
       {user ? (
         <>
@@ -83,11 +83,13 @@ export default function Header({ initialUser }) {
       ) : (
         <div className="profile">
           <a href="#" onClick={handleSignIn}>
-            <img src="/profile.svg" alt="A placeholder user image" />
+            <img className="profileImage" src="/profile.svg" alt="A placeholder user image" />
             Sign In with Google
           </a>
         </div>
       )}
     </header>
+
+    
   );
 }
