@@ -8,8 +8,8 @@
 
 body {
   font-family:
-    "Roboto",
-    ui-sans-serif,
+    "Helvetica",
+    ui-serif,
     system-ui,
     -apple-system;
 }
@@ -55,7 +55,7 @@ dialog {
   }
 
   &::backdrop {
-    background-color: #f6f7f9;
+    background-color: lightcoral;
     opacity: 0.8;
   }
 }
@@ -105,7 +105,7 @@ header {
   padding: 0.8rem;
   align-items: center;
   & img {
-    height: 10rem;
+    height: 12rem;
     /*height: 2rem;*/
   }
 
