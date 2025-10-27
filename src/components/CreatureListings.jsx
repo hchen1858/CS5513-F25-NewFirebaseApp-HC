@@ -51,7 +51,7 @@ const CreatureMetadata = ({ creature }) => (
     <p>
       {creature.creatureType} | {creature.mythologyOrigin} | {creature.habitat}
     </p>    
-    <p>{"◆".repeat(creature.rarity)}</p>  // Diamonds
+    <p>{"◆".repeat(creature.rarity)}</p>  
   </div>
 );
 
