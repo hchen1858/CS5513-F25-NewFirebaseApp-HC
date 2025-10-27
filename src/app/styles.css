@@ -8,8 +8,8 @@
 
 body {
   font-family:
-    "Helvetica",
-    ui-serif,
+    "Roboto",
+    ui-sans-serif,
     system-ui,
     -apple-system;
 }
@@ -137,10 +137,10 @@ header {
     margin-inline-end: 10px;
   }
 
-  color: white;
+  color: gold;
   text-decoration: none;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 3.0rem;
+  font-weight: 800;
 }
 
 .menu {
