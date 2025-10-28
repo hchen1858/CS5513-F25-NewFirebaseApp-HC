@@ -22,6 +22,7 @@ export default async function Home(props) {
   );
   return (
     <main className="main__home">
+      <h1 className="welcome-banner">Welcome to our marvelous mythical menagerie!</h1>
       <img src="/mythos_map.jpg" alt="Mythos Menagerie Zoo Map" className="zoo-map" />
       <CreatureListings
         initialCreatures={creatures}
