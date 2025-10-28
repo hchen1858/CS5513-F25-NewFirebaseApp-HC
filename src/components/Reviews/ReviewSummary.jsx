@@ -48,13 +48,13 @@ if (!reviews || reviews.length === 0) {
     const { response } = await ai.generate(prompt);
     const text = response?.text;
 
-if (!text || text.trim() === '') {
+/*if (!text || text.trim() === '') {
   return (
     <div className="creature__review_summary">
       <p>Unable to generate summary at this time. Empty response from AI</p>
     </div>
   );
-}
+}*/
 
     return (
       <div className="creature__review_summary">
