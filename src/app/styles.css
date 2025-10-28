@@ -248,6 +248,31 @@ header {
   }
 }
 
+.homepage-footer {
+  text-align: center;
+  color: #888;
+  font-size: 0.8rem;
+  margin: 3rem auto 2rem;
+  padding: 1rem;
+  max-width: 90%;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .homepage-footer {
+    max-width: 80%;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-footer {
+    max-width: 70%;
+    font-size: 0.9rem;
+  }
+}
+
 .main__creature {
   background-color: rgb(72, 72, 77);
   min-height: 90vh;

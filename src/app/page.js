@@ -28,6 +28,9 @@ export default async function Home(props) {
         initialCreatures={creatures}
         searchParams={searchParams}
       />
+      <footer className="homepage-footer">
+        All Mythos Menagerie images either generated via Gemini AI, or obtained from Wikipedia Commons under Share-Alike 4.0 or public domain
+      </footer>
     </main>
   );
 }
