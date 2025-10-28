@@ -6,7 +6,7 @@ import {
   signOut,
   onIdTokenChanged,
 } from "@/src/lib/firebase/auth.js";
-import { addFakeCreaturesAndReviews } from "@/src/lib/firebase/firestore.js";
+// import { addFakeCreaturesAndReviews } from "@/src/lib/firebase/firestore.js";
 import { setCookie, deleteCookie } from "cookies-next";
 
 
@@ -65,11 +65,11 @@ export default function Header({ initialUser }) {
               <ul>
                 <li>{user.displayName}</li>
 
-                <li>
+                {/* <li>
                   <a href="#" onClick={addFakeCreaturesAndReviews}>
                     Add sample creatures
                   </a>
-                </li>
+                </li> */}
 
                 <li>
                   <a href="#" onClick={handleSignOut}>
