@@ -45,14 +45,36 @@ if (!reviews || reviews.length === 0) {
       plugins: [googleAI()],
       model: gemini20Flash, // set default model
     });
-    const { response } = await ai.generate(prompt);
+
+    const result = await ai.generate({ prompt });
+    // Try multiple shapes Genkit/Google AI may return
+    const text =
+      result?.outputText ??
+      result?.text ??
+      result?.response?.text ??
+      result?.response?.candidates?.[0]?.content?.parts
+        ?.map((p) => p?.text)
+        .filter(Boolean)
+        .join(" ") ??
+      "";
+
+    if (!text || text.trim() === "") {
+      return (
+        <div className="creature__review_summary">
+          <p>Unable to generate a summary at this time.</p>
+          <p>✨ Summarized with Gemini</p>
+        </div>
+      );
+    }
+
+    /*const { response } = await ai.generate(prompt);
     const text = response?.text;
 
-/*if (!text || text.trim() === '') {
-  return (
-    <div className="creature__review_summary">
+  if (!text || text.trim() === '') {
+    return (
+      <div className="creature__review_summary">
       <p>Unable to generate summary at this time. Empty response from AI</p>
-    </div>
+      </div>
   );
 }*/
 
