@@ -12,6 +12,25 @@ export async function GeminiSummary({ creatureId }) {
     creatureId
   );
 
+  //Make a prompt that covers the 1st 30 reviews, each up to 500 chars long, and separated by an @ character.
+  const reviewSeparator = "@";
+  const MAX_REVIEWS = 30;           // Limit number of reviews
+  const MAX_REVIEW_LENGTH = 500;    // Limit each review to 500 chars
+  
+  const prompt = `
+  Based on the following visitor reviews for a mythical creature exhibit at a zoo, 
+  where each review is separated by a '${reviewSeparator}' character, 
+  create a one-sentence summary focusing on the creature's behavior, appearance, 
+  habitat quality, and overall visitor experience. 
+
+  Here are the reviews: ${reviews
+    .map((review) => (review?.text || "").trim().substring(0, MAX_REVIEW_LENGTH))
+    .filter(Boolean)
+    .slice(0, MAX_REVIEWS)
+    .join(reviewSeparator)}
+`;
+
+  /*
   const reviewSeparator = "@";
 
   const prompt = `
@@ -21,7 +40,7 @@ export async function GeminiSummary({ creatureId }) {
   habitat quality, and overall visitor experience. 
 
   Here are the reviews: ${reviews.map((review) => review.text).join(reviewSeparator)}
-`;
+`; */
   
 if (!reviews || reviews.length === 0) {
   return (
