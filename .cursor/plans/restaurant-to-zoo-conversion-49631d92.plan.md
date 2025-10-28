@@ -1,37 +1,77 @@
-<!-- 49631d92-a2e5-4873-b2be-8c83c3ff2055 d7c725ef-ab3c-4585-9c2e-ed2c78a7e82c -->
-# Update CSS for Mythical Menagerie
+<!-- 49631d92-a2e5-4873-b2be-8c83c3ff2055 f9b31378-c106-4757-8ff0-5eabd9f8137c -->
+# Rename Creature Assets to Standardized Format
 
 ## Overview
 
-Update the `src/app/styles.css` file to replace all restaurant-related CSS class names with creature-themed equivalents to match the component changes already made.
+Rename all 20 creature image files in the `public/creatureassets/` folder to follow the naming convention `creature_N.jpg` where N is an integer from 1 to 20, ensuring each file has a unique name.
 
-## CSS Class Name Changes Required
+## Current Files (20 total):
 
-### Main Layout Classes
+1. another_minotaur.jpg
+2. Black_Dragon.jpg
+3. Chimera_fire_breathing.jpg
+4. Dire_Wolf.jpg
+5. goat_unicorn.jpg
+6. Gryphon.jpg
+7. Kitsune_fox.jpg
+8. mayan_bird_serpent.jpg
+9. mayan_flying_serpent.jpg
+10. mermaid.jpg
+11. Minotaur.jpg
+12. serpent_fire.jpg
+13. Silver_water_dragon.jpg
+14. Silver_wolf.jpg
+15. Stratford_Lyon.png → creature_15.jpg (convert .png to .jpg)
+16. tree_serpent.jpg
+17. Troll.jpg
+18. water_horse.jpg
+19. water_serpent.jpg
+20. Winged_tree_serpent.jpg
 
-- `.main__restaurant` → `.main__creature` (line 201)
+## Renaming Mapping:
 
-### Grid and List Classes  
+- another_minotaur.jpg → creature_1.jpg
+- Black_Dragon.jpg → creature_2.jpg
+- Chimera_fire_breathing.jpg → creature_3.jpg
+- Dire_Wolf.jpg → creature_4.jpg
+- goat_unicorn.jpg → creature_5.jpg
+- Gryphon.jpg → creature_6.jpg
+- Kitsune_fox.jpg → creature_7.jpg
+- mayan_bird_serpent.jpg → creature_8.jpg
+- mayan_flying_serpent.jpg → creature_9.jpg
+- mermaid.jpg → creature_10.jpg
+- Minotaur.jpg → creature_11.jpg
+- serpent_fire.jpg → creature_12.jpg
+- Silver_water_dragon.jpg → creature_13.jpg
+- Silver_wolf.jpg → creature_14.jpg
+- Stratford_Lyon.png → creature_15.jpg
+- tree_serpent.jpg → creature_16.jpg
+- Troll.jpg → creature_17.jpg
+- water_horse.jpg → creature_18.jpg
+- water_serpent.jpg → creature_19.jpg
+- Winged_tree_serpent.jpg → creature_20.jpg
 
-- `.restaurants` → `.creatures` (line 216)
+## Implementation Steps:
 
-### Component-Specific Classes
+1. Rename each file using terminal commands
+2. Update fakeCreatures.js to use the new naming convention
+3. Verify all files are properly renamed
 
-- `.restaurant__meta` → `.creature__meta` (line 260)
-- `.restaurant__details` → `.creature__details` (line 268)
-- `.restaurant__rating` → `.creature__rating` (line 272)
-- `.restaurant__review_summary` → `.creature__review_summary` (line 292)
+## After Renaming:
 
-## Changes Summary
+Update `src/lib/fakeCreatures.js` line 69-72 from:
 
-1. **Line 201**: Update main page class for creature detail pages
-2. **Line 216**: Update grid container class for creature listings
-3. **Line 260**: Update metadata display class
-4. **Line 268**: Update details container class
-5. **Line 272**: Update rating display class
-6. **Line 292**: Update Gemini review summary class
+```javascript
+photo: `https://storage.googleapis.com/firestorequickstarts.appspot.com/food_${randomNumberBetween(1, 22)}.png`,
+```
 
-All other CSS remains unchanged as it applies to general layout, dialogs, headers, filters, and reviews which are theme-agnostic.
+To:
+
+```javascript
+photo: `/creatureassets/creature_${randomNumberBetween(1, 20)}.jpg`,
+```
+
+This will make the creatures use the local creature images instead of the food images.
 
 ### To-dos
 

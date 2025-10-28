@@ -66,12 +66,13 @@ export async function generateFakeCreaturesAndReviews() {
         0
       ),
       rarity: randomNumberBetween(1, 4),
-      photo: `https://storage.googleapis.com/firestorequickstarts.appspot.com/food_${randomNumberBetween(
+      photo: `/creatureassets/creature_${randomNumberBetween(
         1,
-        22
-      )}.png`,
+        20
+      )}.jpg`,
       timestamp: creatureTimestamp,
     };
+   
 
     data.push({
       creatureData,
