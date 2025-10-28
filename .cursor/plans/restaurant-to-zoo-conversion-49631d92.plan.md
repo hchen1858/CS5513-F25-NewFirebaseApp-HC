@@ -1,77 +1,147 @@
-<!-- 49631d92-a2e5-4873-b2be-8c83c3ff2055 f9b31378-c106-4757-8ff0-5eabd9f8137c -->
-# Rename Creature Assets to Standardized Format
+<!-- 49631d92-a2e5-4873-b2be-8c83c3ff2055 34d9be7e-b786-4eb8-8e8d-f6b34f6f212f -->
+# Remove Image Upload Feature via Code Comments
 
 ## Overview
 
-Rename all 20 creature image files in the `public/creatureassets/` folder to follow the naming convention `creature_N.jpg` where N is an integer from 1 to 20, ensuring each file has a unique name.
+Disable the ability for users to upload custom images to creature pages by commenting out relevant code in three files. This preserves the functionality for easy restoration in the future.
 
-## Current Files (20 total):
+## Files to Modify
 
-1. another_minotaur.jpg
-2. Black_Dragon.jpg
-3. Chimera_fire_breathing.jpg
-4. Dire_Wolf.jpg
-5. goat_unicorn.jpg
-6. Gryphon.jpg
-7. Kitsune_fox.jpg
-8. mayan_bird_serpent.jpg
-9. mayan_flying_serpent.jpg
-10. mermaid.jpg
-11. Minotaur.jpg
-12. serpent_fire.jpg
-13. Silver_water_dragon.jpg
-14. Silver_wolf.jpg
-15. Stratford_Lyon.png → creature_15.jpg (convert .png to .jpg)
-16. tree_serpent.jpg
-17. Troll.jpg
-18. water_horse.jpg
-19. water_serpent.jpg
-20. Winged_tree_serpent.jpg
+### 1. `src/components/CreatureDetails.jsx`
 
-## Renaming Mapping:
+Comment out the image upload button (lines 29-42):
 
-- another_minotaur.jpg → creature_1.jpg
-- Black_Dragon.jpg → creature_2.jpg
-- Chimera_fire_breathing.jpg → creature_3.jpg
-- Dire_Wolf.jpg → creature_4.jpg
-- goat_unicorn.jpg → creature_5.jpg
-- Gryphon.jpg → creature_6.jpg
-- Kitsune_fox.jpg → creature_7.jpg
-- mayan_bird_serpent.jpg → creature_8.jpg
-- mayan_flying_serpent.jpg → creature_9.jpg
-- mermaid.jpg → creature_10.jpg
-- Minotaur.jpg → creature_11.jpg
-- serpent_fire.jpg → creature_12.jpg
-- Silver_water_dragon.jpg → creature_13.jpg
-- Silver_wolf.jpg → creature_14.jpg
-- Stratford_Lyon.png → creature_15.jpg
-- tree_serpent.jpg → creature_16.jpg
-- Troll.jpg → creature_17.jpg
-- water_horse.jpg → creature_18.jpg
-- water_serpent.jpg → creature_19.jpg
-- Winged_tree_serpent.jpg → creature_20.jpg
+```jsx
+      <div className="actions">
+        {userId && (
+          <img
+            alt="review"
+            className="review"
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+            src="/review.svg"
+          />
+        )}
+        {/* Image upload feature disabled - uncomment to restore
+        <label
+          onChange={(event) => handleCreatureImage(event.target)}
+          htmlFor="upload-image"
+          className="add"
+        >
+          <input
+            name=""
+            type="file"
+            id="upload-image"
+            className="file-input hidden w-full h-full"
+          />
 
-## Implementation Steps:
-
-1. Rename each file using terminal commands
-2. Update fakeCreatures.js to use the new naming convention
-3. Verify all files are properly renamed
-
-## After Renaming:
-
-Update `src/lib/fakeCreatures.js` line 69-72 from:
-
-```javascript
-photo: `https://storage.googleapis.com/firestorequickstarts.appspot.com/food_${randomNumberBetween(1, 22)}.png`,
+          <img className="add-image" src="/add.svg" alt="Add image" />
+        </label>
+        */}
+      </div>
 ```
 
-To:
+Remove `handleCreatureImage` from the props destructuring (line 9):
 
-```javascript
-photo: `/creatureassets/creature_${randomNumberBetween(1, 20)}.jpg`,
+```jsx
+const CreatureDetails = ({
+  creature,
+  userId,
+  // handleCreatureImage,  // Commented out - image upload disabled
+  setIsOpen,
+  isOpen,
+  children,
+}) => {
 ```
 
-This will make the creatures use the local creature images instead of the food images.
+### 2. `src/components/Creature.jsx`
+
+Comment out the image upload import (line 11):
+
+```jsx
+// import { updateCreatureImage } from "@/src/lib/firebase/storage.js";  // Commented out - image upload disabled
+```
+
+Comment out the `handleCreatureImage` function (lines 35-43):
+
+```jsx
+  /* Image upload feature disabled - uncomment to restore
+  async function handleCreatureImage(target) {
+    const image = target.files ? target.files[0] : null;
+    if (!image) {
+      return;
+    }
+
+    const imageURL = await updateCreatureImage(id, image);
+    setCreatureDetails({ ...creatureDetails, photo: imageURL });
+  }
+  */
+```
+
+Remove `handleCreatureImage` from the CreatureDetails component props (line 61):
+
+```jsx
+      <CreatureDetails
+        creature={creatureDetails}
+        userId={userId}
+        // handleCreatureImage={handleCreatureImage}  // Commented out - image upload disabled
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      >
+```
+
+### 3. `src/lib/firebase/storage.js`
+
+Comment out the import for `updateCreatureImageReference` (line 5):
+
+```jsx
+// import { updateCreatureImageReference } from "@/src/lib/firebase/firestore";  // Commented out - image upload disabled
+```
+
+Comment out both functions (lines 8-33):
+
+```jsx
+/* Image upload feature disabled - uncomment to restore
+export async function updateCreatureImage(creatureId, image) {
+    try {
+      if (!creatureId) {
+        throw new Error("No creature ID has been provided.");
+      }
+  
+      if (!image || !image.name) {
+        throw new Error("A valid image has not been provided.");
+      }
+  
+      const publicImageUrl = await uploadImage(creatureId, image);
+      await updateCreatureImageReference(creatureId, publicImageUrl);
+  
+      return publicImageUrl;
+    } catch (error) {
+      console.error("Error processing request:", error);
+    }
+  }
+  
+  async function uploadImage(creatureId, image) {
+    const filePath = `images/${creatureId}/${image.name}`;
+    const newImageRef = ref(storage, filePath);
+    await uploadBytesResumable(newImageRef, image);
+  
+    return await getDownloadURL(newImageRef);
+  }
+*/
+```
+
+## Benefits
+
+- **UI Clean-up**: Removes the upload button from creature pages
+- **Easy Restoration**: All code preserved in comments with clear labels
+- **Safe**: No database schema changes required
+- **Consistent**: Comments explain why feature is disabled
+
+## To Restore Feature Later
+
+Simply uncomment all sections marked with "Image upload feature disabled - uncomment to restore" in the three files above.
 
 ### To-dos
 
